@@ -8,9 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bpourkazemi.caltraintimetable.R;
 import com.bpourkazemi.caltraintimetable.adapters.TextPagerAdapter;
@@ -18,7 +20,7 @@ import com.bpourkazemi.caltraintimetable.adapters.TextPagerAdapter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class DetailFragment extends Fragment {
+public class DetailFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private Spinner caltrainStationsSpinner;
     private ViewPager northboundViewPager, southboundViewPager;
     private TextPagerAdapter northboundTimesAdapter, southboundTimesAdapter;
@@ -48,9 +50,10 @@ public class DetailFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         caltrainStationsSpinner.setAdapter(adapter);
+        // Register changes from the spinner
+        caltrainStationsSpinner.setOnItemSelectedListener(this);
 
-        // TODO: Register changes from the spinner
-
+        // Setup the viewpagers
         southboundViewPager = (ViewPager) rootView.findViewById(R.id.southbound_pager);
         northboundViewPager = (ViewPager) rootView.findViewById(R.id.northbound_pager);
 
@@ -72,5 +75,14 @@ public class DetailFragment extends Fragment {
         northboundTimesAdapter= new TextPagerAdapter(northboundTimes, getActivity());
         northboundViewPager.setAdapter(northboundTimesAdapter);
         southboundViewPager.setAdapter(southboundTimesAdapter);
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        String selectedStation = parent.getItemAtPosition(pos).toString();
+        Toast.makeText(getActivity(), "Selected: " + selectedStation, Toast.LENGTH_LONG).show();
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
