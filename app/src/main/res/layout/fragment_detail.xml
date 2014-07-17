@@ -9,9 +9,8 @@
     tools:context=".MainActivity$PlaceholderFragment">
 
     <Spinner
+        android:id="@+id/caltrain_stations"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </Spinner>
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
