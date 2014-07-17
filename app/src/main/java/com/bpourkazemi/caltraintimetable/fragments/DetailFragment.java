@@ -1,51 +1,34 @@
 package com.bpourkazemi.caltraintimetable.fragments;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
+
 import com.bpourkazemi.caltraintimetable.R;
+import com.bpourkazemi.caltraintimetable.adapters.TextPagerAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link DetailFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link DetailFragment#newInstance} factory method to
- * create an instance of this fragment.
- *
- */
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class DetailFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
+    private Spinner caltrainStationsSpinner;
+    private ViewPager northboundViewPager, southboundViewPager;
+    private TextPagerAdapter northboundTimesAdapter, southboundTimesAdapter;
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DetailFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static DetailFragment newInstance(String param1, String param2) {
+    public static DetailFragment newInstance() {
         DetailFragment fragment = new DetailFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
     public DetailFragment() {
@@ -53,59 +36,41 @@ public class DetailFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        TextView textView = new TextView(getActivity());
-        textView.setText(R.string.hello_blank_fragment);
-        return textView;
-    }
+        View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+        caltrainStationsSpinner = (Spinner) rootView.findViewById(R.id.caltrain_stations);
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.caltrain_stations, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        caltrainStationsSpinner.setAdapter(adapter);
+
+        // TODO: Register changes from the spinner
+
+        southboundViewPager = (ViewPager) rootView.findViewById(R.id.southbound_pager);
+        northboundViewPager = (ViewPager) rootView.findViewById(R.id.northbound_pager);
+
+        return rootView;
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ArrayList<String> southboundTimes =
+                new ArrayList<String>(
+                        Arrays.asList("12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00"));
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
-    }
+        ArrayList<String> northboundTimes =
+                new ArrayList<String>(
+                        Arrays.asList("12:30", "1:30", "2:30", "3:30", "4:30", "5:30", "6:30", "7:30", "8:30"));
 
+        southboundTimesAdapter = new TextPagerAdapter(southboundTimes, getActivity());
+        northboundTimesAdapter= new TextPagerAdapter(northboundTimes, getActivity());
+        northboundViewPager.setAdapter(northboundTimesAdapter);
+        southboundViewPager.setAdapter(southboundTimesAdapter);
+    }
 }
