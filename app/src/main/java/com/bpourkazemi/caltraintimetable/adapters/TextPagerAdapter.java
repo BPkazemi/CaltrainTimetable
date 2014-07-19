@@ -1,8 +1,10 @@
 package com.bpourkazemi.caltraintimetable.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -26,9 +28,14 @@ public class TextPagerAdapter extends PagerAdapter {
     }
 
     @Override public Object instantiateItem(ViewGroup collection, int position) {
-        // TODO: Add style to textview
         TextView nextArrival = new TextView(context);
         nextArrival.setText(trainTimes.get(position));
+        nextArrival.setTextSize(60);
+        nextArrival.setGravity(Gravity.CENTER);
+        nextArrival.setAlpha( (float) 0.74 );
+
+        // TODO: Change textSize based on screen size
+
         collection.addView(nextArrival);
         return nextArrival;
     }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,13 +46,15 @@ public class DetailFragment extends Fragment implements AdapterView.OnItemSelect
         caltrainStationsSpinner = (Spinner) rootView.findViewById(R.id.caltrain_stations);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.caltrain_stations, android.R.layout.simple_spinner_item);
+                R.array.caltrain_stations, R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         caltrainStationsSpinner.setAdapter(adapter);
         // Register changes from the spinner
         caltrainStationsSpinner.setOnItemSelectedListener(this);
+
+        // TODO: Change the spinner for a selectable listview with sexy animation
 
         // Setup the viewpagers
         southboundViewPager = (ViewPager) rootView.findViewById(R.id.southbound_pager);
