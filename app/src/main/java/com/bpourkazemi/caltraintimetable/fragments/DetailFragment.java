@@ -2,20 +2,17 @@ package com.bpourkazemi.caltraintimetable.fragments;
 
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.text.style.UnderlineSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bpourkazemi.caltraintimetable.R;
+import com.bpourkazemi.caltraintimetable.Utils.CaltrainDataHandler;
 import com.bpourkazemi.caltraintimetable.adapters.TextPagerAdapter;
 
 import java.util.ArrayList;
@@ -78,6 +75,9 @@ public class DetailFragment extends Fragment implements AdapterView.OnItemSelect
         northboundTimesAdapter= new TextPagerAdapter(northboundTimes, getActivity());
         northboundViewPager.setAdapter(northboundTimesAdapter);
         southboundViewPager.setAdapter(southboundTimesAdapter);
+
+        CaltrainDataHandler handler = new CaltrainDataHandler(getActivity());
+        handler.formatAndSaveData();
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
