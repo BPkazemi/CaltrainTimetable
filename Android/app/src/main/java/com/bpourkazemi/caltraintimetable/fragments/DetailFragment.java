@@ -12,7 +12,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bpourkazemi.caltraintimetable.R;
-import com.bpourkazemi.caltraintimetable.Utils.CaltrainDataHandler;
+import com.bpourkazemi.caltraintimetable.utils.CaltrainDataHandler;
 import com.bpourkazemi.caltraintimetable.adapters.TextPagerAdapter;
 
 import java.util.ArrayList;
@@ -42,6 +42,7 @@ public class DetailFragment extends Fragment implements AdapterView.OnItemSelect
 
         caltrainStationsSpinner = (Spinner) rootView.findViewById(R.id.caltrain_stations);
 
+        // TODO: Replace this with an array
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.caltrain_stations, R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
@@ -51,7 +52,7 @@ public class DetailFragment extends Fragment implements AdapterView.OnItemSelect
         // Register changes from the spinner
         caltrainStationsSpinner.setOnItemSelectedListener(this);
 
-        // TODO: Change the spinner for a selectable listview with sexy animation
+        // TODO: Swap the spinner with a selectable listview + sexy animation
 
         // Setup the viewpagers
         southboundViewPager = (ViewPager) rootView.findViewById(R.id.southbound_pager);
@@ -63,6 +64,8 @@ public class DetailFragment extends Fragment implements AdapterView.OnItemSelect
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        // TODO: These will need to change with the spinner selection
         ArrayList<String> southboundTimes =
                 new ArrayList<String>(
                         Arrays.asList("12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00"));
@@ -77,12 +80,14 @@ public class DetailFragment extends Fragment implements AdapterView.OnItemSelect
         southboundViewPager.setAdapter(southboundTimesAdapter);
 
         CaltrainDataHandler handler = new CaltrainDataHandler(getActivity());
-        handler.formatAndSaveData();
+        handler.setupData();
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         String selectedStation = parent.getItemAtPosition(pos).toString();
         Toast.makeText(getActivity(), "Selected: " + selectedStation, Toast.LENGTH_LONG).show();
+
+        // TODO: Update southboundTimes and northboundTimes selection
     }
 
     public void onNothingSelected(AdapterView<?> parent) {

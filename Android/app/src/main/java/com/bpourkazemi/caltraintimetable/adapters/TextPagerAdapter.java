@@ -34,7 +34,7 @@ public class TextPagerAdapter extends PagerAdapter {
         nextArrival.setGravity(Gravity.CENTER);
         nextArrival.setAlpha( (float) 0.74 );
 
-        // TODO: Change textSize based on screen size
+        // TODO: Change textSize based on screen size, in the Android way
 
         collection.addView(nextArrival);
         return nextArrival;

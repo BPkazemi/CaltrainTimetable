@@ -5,8 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.sql.SQLException;
-
 /**
  * Created by babakpourkazemi on 7/20/14.
  *
@@ -18,7 +16,7 @@ public class CaltrainSQLiteHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_TRAIN_TIMES = "train_times";
     public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_TRAIN_STATION = "train_station";
+    public static final String COLUMN_TRAIN_STOP = "train_stop";
     public static final String COLUMN_NORHTBOUND_DEPARTURE = "northbound_departure";
     public static final String COLUMN_SOUTHBOUND_DEPARTURE = "southbound_departure";
 
@@ -28,7 +26,7 @@ public class CaltrainSQLiteHelper extends SQLiteOpenHelper {
     private static final String DATABASE_CREATE =
             "create table " + TABLE_TRAIN_TIMES + "("
             + COLUMN_ID + " integer primary key autoincrement, "
-            + COLUMN_TRAIN_STATION + " text not null, "
+            + COLUMN_TRAIN_STOP + " text not null, "
             + COLUMN_NORHTBOUND_DEPARTURE + " text not null, "
             + COLUMN_SOUTHBOUND_DEPARTURE+ " text not null);";
 
@@ -45,10 +43,10 @@ public class CaltrainSQLiteHelper extends SQLiteOpenHelper {
         database.execSQL(DATABASE_CREATE);
     }
 
-//    @Override public void onOpen(SQLiteDatabase database) {
-//        Log.w(CaltrainSQLiteHelper.class.getName(), "onOpen");
-//        database.execSQL(DATABASE_DESTROY);
-//    }
+    @Override public void onOpen(SQLiteDatabase database) {
+        Log.w(CaltrainSQLiteHelper.class.getName(), "onOpen");
+        database.execSQL(DATABASE_DESTROY);
+    }
 
     @Override public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
         Log.w(CaltrainSQLiteHelper.class.getName(),
