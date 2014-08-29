@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="caltrain_stations">
+        <!--Zone 1-->
+        <item><u>San Francisco</u></item>
+        <item><u>22nd Street</u></item>
+        <item><u>Bayshore</u></item>
+        <item><u>South San Francisco</u></item>
+        <item><u>San Bruno</u></item>
+
+        <!--Zone 2-->
+        <item><u>Millbrae Transit Center</u></item>
+        <item><u>Broadway</u></item> <!-- Weekend only -->
+        <item><u>Burlingame</u></item>
+        <item><u>San Mateo</u></item>
+        <item><u>Hayward Park</u></item>
+        <item><u>Hillsdale</u></item>
+        <item><u>Belmont</u></item>
+        <item><u>San Carlos</u></item>
+        <item><u>Redwood City</u></item>
+
+        <!--Zone 3-->
+        <item><u>Atherton</u></item> <!-- Weekend only -->
+        <item><u>Menlo Park</u></item>
+        <item><u>Palo Alto</u></item>
+        <item><u>Stanford</u></item> <!-- Football only -->
+        <item><u>California Ave.</u></item>
+        <item><u>San Antonio</u></item>
+        <item><u>Mountain View</u></item>
+        <item><u>Sunnyvale</u></item>
+
+        <!--Zone 4-->
+        <item><u>Lawrence</u></item>
+        <item><u>Santa Clara</u></item>
+        <item><u>College Park</u></item>
+        <item><u>San Jose Diridon</u></item>
+        <item><u>Tamien</u></item> <!-- Special cases from here through Zone 6 -->
+
+        <!--Zone 5-->
+        <item><u>Capitol</u></item>
+        <item><u>Blossom Hill</u></item>
+
+        <!--Zone 6-->
+        <item><u>Morgan Hill</u></item>
+        <item><u>San Martin</u></item>
+        <item><u>Gilroy</u></item>
+    </string-array>
+</resources>
